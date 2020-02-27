@@ -1,15 +1,18 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
-using Arthas.Utility.Element;
 
 namespace Arthas.Controls
 {
     public class MetroMenuTabItem : TabItem
     {
-        public static readonly DependencyProperty IconProperty = ElementBase.Property<MetroMenuTabItem, ImageSource>(nameof(IconProperty), null);
-        public static readonly DependencyProperty IconMoveProperty = ElementBase.Property<MetroMenuTabItem, ImageSource>(nameof(IconMoveProperty), null);
-        public static readonly DependencyProperty TextHorizontalAlignmentProperty = ElementBase.Property<MetroMenuTabItem, HorizontalAlignment>(nameof(TextHorizontalAlignmentProperty), HorizontalAlignment.Right);
+        static MetroMenuTabItem()
+        {
+            DefaultStyleKeyProperty.OverrideMetadata(typeof(MetroMenuTabItem), new FrameworkPropertyMetadata(typeof(MetroMenuTabItem)));
+        }
+
+        public static readonly DependencyProperty IconProperty =
+            DependencyProperty.Register(nameof(Icon), typeof(ImageSource), typeof(MetroMenuTabItem));
 
         public ImageSource Icon
         {
@@ -17,21 +20,22 @@ namespace Arthas.Controls
             set => SetValue(IconProperty, value);
         }
 
+        public static readonly DependencyProperty IconMoveProperty =
+            DependencyProperty.Register(nameof(IconMove), typeof(ImageSource), typeof(MetroMenuTabItem));
+
         public ImageSource IconMove
         {
             get => (ImageSource)GetValue(IconMoveProperty);
             set => SetValue(IconMoveProperty, value);
         }
 
+        public static readonly DependencyProperty TextHorizontalAlignmentProperty =
+            DependencyProperty.Register(nameof(TextHorizontalAlignment), typeof(HorizontalAlignment), typeof(MetroMenuTabItem), new FrameworkPropertyMetadata(HorizontalAlignment.Right));
+
         public HorizontalAlignment TextHorizontalAlignment
         {
             get => (HorizontalAlignment)GetValue(TextHorizontalAlignmentProperty);
             set => SetValue(TextHorizontalAlignmentProperty, value);
-        }
-
-        static MetroMenuTabItem()
-        {
-            ElementBase.DefaultStyle<MetroMenuTabItem>(DefaultStyleKeyProperty);
         }
     }
 }

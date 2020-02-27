@@ -1,23 +1,23 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
-using Arthas.Utility.Element;
 
 namespace Arthas.Controls
 {
     public class MetroPath : ContentControl
     {
-        public static readonly DependencyProperty DataProperty = ElementBase.Property<MetroPath, Geometry>(nameof(DataProperty));
+        static MetroPath()
+        {
+            DefaultStyleKeyProperty.OverrideMetadata(typeof(MetroPath), new FrameworkPropertyMetadata(typeof(MetroPath)));
+        }
+
+        public static readonly DependencyProperty DataProperty =
+            DependencyProperty.Register(nameof(Data), typeof(Geometry), typeof(MetroPath));
 
         public Geometry Data
         {
             get => (Geometry)GetValue(DataProperty);
             set => SetValue(DataProperty, value);
-        }
-
-        static MetroPath()
-        {
-            ElementBase.DefaultStyle<MetroPath>(DefaultStyleKeyProperty);
         }
     }
 }

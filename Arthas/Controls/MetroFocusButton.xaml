@@ -58,7 +58,7 @@
                                 <VisualState x:Name="Disabled" />
                             </VisualStateGroup>
                         </VisualStateManager.VisualStateGroups>
-                        <Border Background="{TemplateBinding Background}" CornerRadius="{TemplateBinding CornerRadius,Converter={StaticResource DoubleToCornerRadius}}" BorderThickness="{TemplateBinding BorderThickness,Converter={StaticResource DoubleToThickness}}" />
+                        <Border Background="{TemplateBinding Background}" CornerRadius="{TemplateBinding CornerRadius,Converter={StaticResource DoubleToCornerRadius}}" BorderThickness="{TemplateBinding BorderThickness, Converter={StaticResource DoubleToThickness}}" />
                         <ContentPresenter />
                         <Rectangle x:Name="normal" Fill="{TemplateBinding Foreground}" RadiusX="{TemplateBinding CornerRadius}" RadiusY="{TemplateBinding CornerRadius}" Stroke="{TemplateBinding BorderBrush}" StrokeThickness="{TemplateBinding BorderThickness}" StrokeDashArray="{TemplateBinding StrokeDashArray}" Opacity="1" />
                         <Rectangle x:Name="mouse" Fill="{TemplateBinding MouseMoveForeground}" RadiusX="{TemplateBinding CornerRadius}" RadiusY="{TemplateBinding CornerRadius}" Stroke="{TemplateBinding MouseMoveBorderBrush}" StrokeThickness="{TemplateBinding MouseMoveBorderThickness}" StrokeDashArray="{TemplateBinding MouseMoveStrokeDashArray}" Opacity="0" />

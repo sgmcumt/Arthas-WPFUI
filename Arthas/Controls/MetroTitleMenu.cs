@@ -1,5 +1,5 @@
-﻿using System.Windows.Controls;
-using Arthas.Utility.Element;
+﻿using System.Windows;
+using System.Windows.Controls;
 
 namespace Arthas.Controls
 {
@@ -7,7 +7,7 @@ namespace Arthas.Controls
     {
         static MetroTitleMenu()
         {
-            ElementBase.DefaultStyle<MetroTitleMenu>(DefaultStyleKeyProperty);
+            DefaultStyleKeyProperty.OverrideMetadata(typeof(MetroTitleMenu), new FrameworkPropertyMetadata(typeof(MetroTitleMenu)));
         }
     }
 }

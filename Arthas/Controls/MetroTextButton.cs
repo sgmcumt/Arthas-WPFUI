@@ -1,5 +1,5 @@
-﻿using System.Windows.Controls;
-using Arthas.Utility.Element;
+﻿using System.Windows;
+using System.Windows.Controls;
 
 namespace Arthas.Controls
 {
@@ -7,7 +7,7 @@ namespace Arthas.Controls
     {
         static MetroTextButton()
         {
-            ElementBase.DefaultStyle<MetroTextButton>(DefaultStyleKeyProperty);
+            DefaultStyleKeyProperty.OverrideMetadata(typeof(MetroTextButton), new FrameworkPropertyMetadata(typeof(MetroTextButton)));
         }
     }
 }

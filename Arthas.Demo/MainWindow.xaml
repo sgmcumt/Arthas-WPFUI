@@ -10,34 +10,34 @@
     </metro:MetroWindow.DataContext>
     <metro:MetroWindow.Menu>
         <metro:MetroTitleMenu>
-            <metro:MetroTitleMenuItem Header="多级菜单测试" Icon="Resources/titleMuenIcon.png">
+            <metro:MetroTitleMenuItem Header="多级菜单测试" Icon="{FontAwesomeImageSource Icon=GitHub}">
                 <metro:MetroMenuItem Header="二级菜单" />
                 <metro:MetroMenuItem Header="二级菜单" IsEnabled="False" />
                 <metro:MetroMenuItem Header="二级菜单" />
                 <metro:MetroMenuSeparator />
                 <metro:MetroMenuItem Header="二级菜单" />
-                <metro:MetroMenuItem Header="二级菜单" Icon="Resources/titleMuenIcon.png" />
-                <metro:MetroMenuItem Header="内部是三级菜单" Icon="Resources/titleMuenIcon.png">
-                    <metro:MetroMenuItem Header="三级菜单" Icon="Resources/titleMuenIcon.png" />
-                    <metro:MetroMenuItem Header="三级菜单" IsEnabled="False" Icon="Resources/titleMuenIcon.png" />
-                    <metro:MetroMenuItem Header="三级菜单" Icon="Resources/titleMuenIcon.png" />
+                <metro:MetroMenuItem Header="二级菜单" Icon="{FontAwesomeImageSource Icon=GitHub}" />
+                <metro:MetroMenuItem Header="内部是三级菜单" Icon="{FontAwesomeImageSource Icon=GitHub}">
+                    <metro:MetroMenuItem Header="三级菜单" Icon="{FontAwesomeImageSource Icon=GitHub}" />
+                    <metro:MetroMenuItem Header="三级菜单" IsEnabled="False" Icon="{FontAwesomeImageSource Icon=GitHub}" />
+                    <metro:MetroMenuItem Header="三级菜单" Icon="{FontAwesomeImageSource Icon=GitHub}" />
                     <metro:MetroMenuSeparator />
-                    <metro:MetroMenuItem Header="三级菜单" Icon="Resources/titleMuenIcon.png" />
-                    <metro:MetroMenuItem Header="内部是三级菜单" Icon="Resources/titleMuenIcon.png">
-                        <metro:MetroMenuItem Header="三级菜单" Icon="Resources/titleMuenIcon.png" />
-                        <metro:MetroMenuItem Header="三级菜单" IsEnabled="False" Icon="Resources/titleMuenIcon.png" />
-                        <metro:MetroMenuItem Header="三级菜单" Icon="Resources/titleMuenIcon.png" />
+                    <metro:MetroMenuItem Header="三级菜单" Icon="{FontAwesomeImageSource Icon=GitHub}" />
+                    <metro:MetroMenuItem Header="内部是三级菜单" Icon="{FontAwesomeImageSource Icon=GitHub}">
+                        <metro:MetroMenuItem Header="三级菜单" Icon="{FontAwesomeImageSource Icon=GitHub}" />
+                        <metro:MetroMenuItem Header="三级菜单" IsEnabled="False" Icon="{FontAwesomeImageSource Icon=GitHub}" />
+                        <metro:MetroMenuItem Header="三级菜单" Icon="{FontAwesomeImageSource Icon=GitHub}" />
                         <metro:MetroMenuSeparator />
-                        <metro:MetroMenuItem Header="三级菜单" Icon="Resources/titleMuenIcon.png" />
-                        <metro:MetroMenuItem Header="三级菜单" Icon="Resources/titleMuenIcon.png" />
+                        <metro:MetroMenuItem Header="三级菜单" Icon="{FontAwesomeImageSource Icon=GitHub}" />
+                        <metro:MetroMenuItem Header="三级菜单" Icon="{FontAwesomeImageSource Icon=GitHub}" />
                     </metro:MetroMenuItem>
                 </metro:MetroMenuItem>
                 <metro:MetroMenuItem Header="二级菜单" />
             </metro:MetroTitleMenuItem>
-            <metro:MetroTitleMenuItem Header="测试" IsEnabled="False" Icon="Resources/titleMuenIcon.png" />
+            <metro:MetroTitleMenuItem Header="测试" IsEnabled="False" Icon="{FontAwesomeImageSource Icon=GitHub}" />
             <metro:MetroTitleMenuItem Header="测试" IsEnabled="False" />
             <metro:MetroTitleMenuItem Header="文件" />
-            <metro:MetroTitleMenuItem Header="关于" Icon="Resources/titleMuenIcon.png" />
+            <metro:MetroTitleMenuItem Header="关于" Icon="{FontAwesomeImageSource Icon=GitHub}" />
         </metro:MetroTitleMenu>
     </metro:MetroWindow.Menu>
     <metro:MetroWindow.ContextMenu>
@@ -47,20 +47,20 @@
             <metro:MetroMenuItem Header="二级菜单" />
             <metro:MetroMenuSeparator />
             <metro:MetroMenuItem Header="二级菜单" />
-            <metro:MetroMenuItem Header="二级菜单" Icon="Resources/titleMuenIcon.png" />
-            <metro:MetroMenuItem Header="内部是三级菜单" Icon="Resources/titleMuenIcon.png">
-                <metro:MetroMenuItem Header="三级菜单" Icon="Resources/titleMuenIcon.png" />
-                <metro:MetroMenuItem Header="三级菜单" IsEnabled="False" Icon="Resources/titleMuenIcon.png" />
-                <metro:MetroMenuItem Header="三级菜单" Icon="Resources/titleMuenIcon.png" />
+            <metro:MetroMenuItem Header="二级菜单" Icon="{FontAwesomeImageSource Icon=GitHub}" />
+            <metro:MetroMenuItem Header="内部是三级菜单" Icon="{FontAwesomeImageSource Icon=GitHub}">
+                <metro:MetroMenuItem Header="三级菜单" Icon="{FontAwesomeImageSource Icon=GitHub}" />
+                <metro:MetroMenuItem Header="三级菜单" IsEnabled="False" Icon="{FontAwesomeImageSource Icon=GitHub}" />
+                <metro:MetroMenuItem Header="三级菜单" Icon="{FontAwesomeImageSource Icon=GitHub}" />
                 <metro:MetroMenuSeparator />
-                <metro:MetroMenuItem Header="三级菜单" Icon="Resources/titleMuenIcon.png" />
-                <metro:MetroMenuItem Header="内部是三级菜单" Icon="Resources/titleMuenIcon.png">
-                    <metro:MetroMenuItem Header="三级菜单" Icon="Resources/titleMuenIcon.png" />
-                    <metro:MetroMenuItem Header="三级菜单" IsEnabled="False" Icon="Resources/titleMuenIcon.png" />
-                    <metro:MetroMenuItem Header="三级菜单" Icon="Resources/titleMuenIcon.png" />
+                <metro:MetroMenuItem Header="三级菜单" Icon="{FontAwesomeImageSource Icon=GitHub}" />
+                <metro:MetroMenuItem Header="内部是三级菜单" Icon="{FontAwesomeImageSource Icon=GitHub}">
+                    <metro:MetroMenuItem Header="三级菜单" Icon="{FontAwesomeImageSource Icon=GitHub}" />
+                    <metro:MetroMenuItem Header="三级菜单" IsEnabled="False" Icon="{FontAwesomeImageSource Icon=GitHub}" />
+                    <metro:MetroMenuItem Header="三级菜单" Icon="{FontAwesomeImageSource Icon=GitHub}" />
                     <metro:MetroMenuSeparator />
-                    <metro:MetroMenuItem Header="三级菜单" Icon="Resources/titleMuenIcon.png" />
-                    <metro:MetroMenuItem Header="三级菜单" Icon="Resources/titleMuenIcon.png" />
+                    <metro:MetroMenuItem Header="三级菜单" Icon="{FontAwesomeImageSource Icon=GitHub}" />
+                    <metro:MetroMenuItem Header="三级菜单" Icon="{FontAwesomeImageSource Icon=GitHub}" />
                 </metro:MetroMenuItem>
             </metro:MetroMenuItem>
             <metro:MetroMenuSeparator />
@@ -69,7 +69,7 @@
     </metro:MetroWindow.ContextMenu>
     <Grid>
         <metro:MetroMenuTabControl IconMode="True">
-            <metro:MetroMenuTabItem Header="控件" Icon="Resources/icon.png" IconMove="Resources/iconMove.png">
+            <metro:MetroMenuTabItem Header="控件" Icon="{FontAwesomeImageSource Icon=GitHub}" IconMove="{FontAwesomeImageSource Icon=GitHub}">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition MinWidth="160" Width="Auto" />
@@ -78,20 +78,20 @@
                     <metro:MetroScrollViewer>
                         <Border BorderBrush="#19000000" BorderThickness="0,0,1,0">
                             <StackPanel x:Name="Lists">
-                                <metro:MetroExpander Header="Button" Hint="提示" Icon="Resources/tabIcon.png" />
+                                <metro:MetroExpander Header="Button" Hint="提示" Icon="{FontAwesomeImageSource Icon=GitHub}" />
                                 <metro:MetroExpander Header="Button" Hint="1 / 100" />
                                 <metro:MetroExpander Header="Header" Hint="可以修改" HintBackground="#FFF15151">
                                     <StackPanel>
-                                        <metro:MetroExpander Header="Button" Icon="Resources/tabIcon.png" />
-                                        <metro:MetroExpander Header="Button" Icon="Resources/tabIcon.png" />
-                                        <metro:MetroExpander Header="Button" Icon="Resources/tabIcon.png" />
+                                        <metro:MetroExpander Header="Button" Icon="{FontAwesomeImageSource Icon=GitHub}" />
+                                        <metro:MetroExpander Header="Button" Icon="{FontAwesomeImageSource Icon=GitHub}" />
+                                        <metro:MetroExpander Header="Button" Icon="{FontAwesomeImageSource Icon=GitHub}" />
                                         <metro:MetroExpander Header="Button" />
                                         <metro:MetroExpander Header="Button" />
                                     </StackPanel>
                                 </metro:MetroExpander>
                                 <metro:MetroExpander Header="Header" IsExpanded="True">
                                     <StackPanel>
-                                        <metro:MetroExpander Header="子内容长标题测试" Icon="Resources/tabIcon.png" Hint="1 / 100" />
+                                        <metro:MetroExpander Header="子内容长标题测试" Icon="{FontAwesomeImageSource Icon=GitHub}" Hint="1 / 100" />
                                         <metro:MetroExpander Header="Button" />
                                         <metro:MetroExpander Header="Button" />
                                         <metro:MetroExpander Header="Button" />
@@ -103,10 +103,10 @@
                         </Border>
                     </metro:MetroScrollViewer>
                     <metro:MetroTabControl Grid.Column="1">
-                        <metro:MetroTabItem Header="预览控件" Icon="Resources/tabIcon.png">
+                        <metro:MetroTabItem Header="预览控件" Icon="{FontAwesomeImageSource Icon=GitHub}">
                             <Grid>
                                 <metro:MetroScrollViewer>
-                                    <metro:MetroWaterfallFlow x:Name="WaterfallFlow" ListWidth="300">
+                                    <metro:MetroWaterfallFlow x:Name="WaterfallFlow" Size="300" Margin="10">
                                         <Grid>
                                             <metro:MetroGroupBox Header="多选框">
                                                 <Grid>
@@ -239,11 +239,11 @@
                                                     <metro:MetroTextBox InputHint="InputHint..." PopupHint="This is TextBox!" Margin="0,10,0,0" />
                                                     <metro:MetroTextBox Margin="0,10,0,0" />
                                                     <metro:MetroTextBox Title="Default Title" InputHint="InputHint..." PopupHint="This is TextBox!" Margin="0,10,0,0" />
-                                                    <metro:MetroTextBox Title="Default Title" InputHint="InputHint..." ButtonTitle="Button" PopupHint="Length is more than 10!" Margin="0,10,0,0" Icon="Resources/editIcon.png" />
-                                                    <metro:MetroTextBox Text="0123456789" Title="Default Title" InputHint="InputHint..." ButtonTitle="Button" PopupHint="Length is more than 10!" Margin="0,10,0,0" Icon="Resources/editIcon.png" />
-                                                    <metro:MetroTextBox Title="Default Title" InputHint="InputHint..." Text="This is Content!" ButtonTitle="Button" PopupHint="这是一个多行编辑框!" Margin="0,10,0,0" Icon="Resources/editIcon.png" MultipleLine="True" />
-                                                    <metro:MetroTextBox Title="Default Title" InputHint="InputHint..." ButtonTitle="Button" PopupHint="Length is more than 10!" Margin="0,10,0,0" Icon="Resources/editIcon.png" IsEnabled="False" />
-                                                    <metro:MetroTextBox Title="Default Title" InputHint="InputHint..." Text="已经输入内容且禁用" ButtonTitle="Button" PopupHint="Length is more than 10!" Margin="0,10,0,0" Icon="Resources/editIcon.png" IsEnabled="False" />
+                                                    <metro:MetroTextBox Title="Default Title" InputHint="InputHint..." ButtonTitle="Button" PopupHint="Length is more than 10!" Margin="0,10,0,0" Icon="{FontAwesomeImageSource Icon=GitHub}" />
+                                                    <metro:MetroTextBox Text="0123456789" Title="Default Title" InputHint="InputHint..." ButtonTitle="Button" PopupHint="Length is more than 10!" Margin="0,10,0,0" Icon="{FontAwesomeImageSource Icon=GitHub}" />
+                                                    <metro:MetroTextBox Title="Default Title" InputHint="InputHint..." Text="This is Content!" ButtonTitle="Button" PopupHint="这是一个多行编辑框!" Margin="0,10,0,0" Icon="{FontAwesomeImageSource Icon=GitHub}" MultipleLine="True" />
+                                                    <metro:MetroTextBox Title="Default Title" InputHint="InputHint..." ButtonTitle="Button" PopupHint="Length is more than 10!" Margin="0,10,0,0" Icon="{FontAwesomeImageSource Icon=GitHub}" IsEnabled="False" />
+                                                    <metro:MetroTextBox Title="Default Title" InputHint="InputHint..." Text="已经输入内容且禁用" ButtonTitle="Button" PopupHint="Length is more than 10!" Margin="0,10,0,0" Icon="{FontAwesomeImageSource Icon=GitHub}" IsEnabled="False" />
                                                 </StackPanel>
                                             </metro:MetroGroupBox>
                                         </Grid>
@@ -273,10 +273,10 @@
                     </metro:MetroTabControl>
                 </Grid>
             </metro:MetroMenuTabItem>
-            <metro:MetroMenuTabItem Header="瀑布流控件" Icon="Resources/icon.png" IconMove="Resources/iconMove.png">
+            <metro:MetroMenuTabItem Header="瀑布流控件" Icon="{FontAwesomeImageSource Icon=GitHub}" IconMove="{FontAwesomeImageSource Icon=GitHub}">
                 <Grid>
                     <metro:MetroScrollViewer>
-                        <metro:MetroWaterfallFlow ListWidth="180">
+                        <metro:MetroWaterfallFlow Size="180" Margin="10">
                             <Grid>
                                 <Border BorderBrush="#33000000" BorderThickness="1" Height="500">
                                     <metro:MetroTextBlock FontSize="30" Text="1" Margin="7,0,0,0" Opacity="0.65" />
@@ -381,7 +381,7 @@
                     </metro:MetroScrollViewer>
                 </Grid>
             </metro:MetroMenuTabItem>
-            <metro:MetroMenuTabItem Header="滚动框" Icon="Resources/icon.png" IconMove="Resources/iconMove.png" Height="40" VerticalAlignment="Top">
+            <metro:MetroMenuTabItem Header="滚动框" Icon="{FontAwesomeImageSource Icon=GitHub}" IconMove="{FontAwesomeImageSource Icon=GitHub}" Height="40" VerticalAlignment="Top">
                 <Grid>
                     <metro:MetroScrollViewer>
                         <Grid Width="2000" Height="2000">

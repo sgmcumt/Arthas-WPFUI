@@ -5,4 +5,17 @@
     <ItemGroup>
         <PackageReference Include="ControlzEx" Version="4.2.2" />
     </ItemGroup>
+    <ItemGroup>
+        <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
+        <None Update="Themes\Generic.tt">
+            <Generator>TextTemplatingFileGenerator</Generator>
+            <LastGenOutput>Generic.xaml</LastGenOutput>
+        </None>
+        <Page Update="Themes\Generic.xaml">
+            <DesignTime>True</DesignTime>
+            <AutoGen>True</AutoGen>
+            <DependentUpon>Generic.tt</DependentUpon>
+            <Generator>MSBuild:Compile</Generator>
+        </Page>
+    </ItemGroup>
 </Project>

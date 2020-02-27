@@ -2,7 +2,6 @@
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
-using Arthas.Utility.Element;
 using ControlzEx.Behaviors;
 
 namespace Arthas.Controls
@@ -14,20 +13,17 @@ namespace Arthas.Controls
             DefaultStyleKeyProperty.OverrideMetadata(typeof(MetroWindow), new FrameworkPropertyMetadata(typeof(MetroWindow)));
         }
 
-        public static readonly DependencyProperty IsSubWindowShowProperty = ElementBase.Property<MetroWindow, bool>(nameof(IsSubWindowShowProperty), false);
-        public static readonly DependencyProperty MenuProperty = ElementBase.Property<MetroWindow, object>(nameof(MenuProperty), null);
-        public new static readonly DependencyProperty BorderBrushProperty = ElementBase.Property<MetroWindow, Brush>(nameof(BorderBrushProperty));
-        public static readonly DependencyProperty TitleForegroundProperty = ElementBase.Property<MetroWindow, Brush>(nameof(TitleForegroundProperty));
+        public static readonly DependencyProperty IsSubWindowShowProperty =
+            DependencyProperty.Register(nameof(IsSubWindowShow), typeof(bool), typeof(MetroWindow));
 
         public bool IsSubWindowShow
         {
             get => (bool)GetValue(IsSubWindowShowProperty);
-            set
-            {
-                SetValue(IsSubWindowShowProperty, value);
-                GoToState();
-            }
+            set => SetValue(IsSubWindowShowProperty, value);
         }
+
+        public static readonly DependencyProperty MenuProperty =
+            DependencyProperty.Register(nameof(Menu), typeof(object), typeof(MetroWindow));
 
         public object Menu
         {
@@ -35,25 +31,23 @@ namespace Arthas.Controls
             set => SetValue(MenuProperty, value);
         }
 
+        public new static readonly DependencyProperty BorderBrushProperty =
+            DependencyProperty.Register(nameof(BorderBrush), typeof(Brush), typeof(MetroWindow));
+
         public new Brush BorderBrush
         {
             get => (Brush)GetValue(BorderBrushProperty);
             set => SetValue(BorderBrushProperty, value);
         }
 
+        public static readonly DependencyProperty TitleForegroundProperty =
+            DependencyProperty.Register(nameof(TitleForeground), typeof(Brush), typeof(MetroWindow));
+
         public Brush TitleForeground
         {
             get => (Brush)GetValue(TitleForegroundProperty);
             set => SetValue(TitleForegroundProperty, value);
         }
-
-        void GoToState()
-        {
-            ElementBase.GoToState(this, IsSubWindowShow ? "Enabled" : "Disable");
-        }
-
-        public object ReturnValue { get; set; } = null;
-        public bool EscClose { get; set; } = false;
 
         protected override void OnInitialized(EventArgs e)
         {

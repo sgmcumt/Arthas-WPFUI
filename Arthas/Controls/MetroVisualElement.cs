@@ -1,17 +1,18 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
-using Arthas.Utility.Element;
 
 namespace Arthas.Controls
 {
     public class MetroVisualElement : ContentControl
     {
-        public static readonly DependencyProperty VisualProperty = ElementBase.Property<MetroVisualElement, Visual>(nameof(VisualProperty));
-        public static readonly DependencyProperty VisualOpacityProperty = ElementBase.Property<MetroVisualElement, double>(nameof(VisualOpacityProperty));
-        public static readonly DependencyProperty VisualBlurRadiusProperty = ElementBase.Property<MetroVisualElement, double>(nameof(VisualBlurRadiusProperty));
-        public static readonly DependencyProperty LeftProperty = ElementBase.Property<MetroVisualElement, double>(nameof(LeftProperty));
-        public static readonly DependencyProperty TopProperty = ElementBase.Property<MetroVisualElement, double>(nameof(TopProperty));
+        static MetroVisualElement()
+        {
+            DefaultStyleKeyProperty.OverrideMetadata(typeof(MetroVisualElement), new FrameworkPropertyMetadata(typeof(MetroVisualElement)));
+        }
+
+        public static readonly DependencyProperty VisualProperty =
+            DependencyProperty.Register(nameof(Visual), typeof(Visual), typeof(MetroVisualElement));
 
         public Visual Visual
         {
@@ -19,11 +20,17 @@ namespace Arthas.Controls
             set => SetValue(VisualProperty, value);
         }
 
+        public static readonly DependencyProperty VisualOpacityProperty =
+            DependencyProperty.Register(nameof(VisualOpacity), typeof(double), typeof(MetroVisualElement));
+
         public new double VisualOpacity
         {
             get => (double)GetValue(VisualOpacityProperty);
             set => SetValue(VisualOpacityProperty, value);
         }
+
+        public static readonly DependencyProperty VisualBlurRadiusProperty =
+            DependencyProperty.Register(nameof(VisualBlurRadius), typeof(double), typeof(MetroVisualElement));
 
         public double VisualBlurRadius
         {
@@ -31,21 +38,22 @@ namespace Arthas.Controls
             set => SetValue(VisualBlurRadiusProperty, value);
         }
 
+        public static readonly DependencyProperty LeftProperty =
+            DependencyProperty.Register(nameof(Left), typeof(double), typeof(MetroVisualElement));
+
         public double Left
         {
             get => (double)GetValue(LeftProperty);
             set => SetValue(LeftProperty, value);
         }
 
+        public static readonly DependencyProperty TopProperty =
+            DependencyProperty.Register(nameof(Top), typeof(double), typeof(MetroVisualElement));
+
         public double Top
         {
             get => (double)GetValue(TopProperty);
             set => SetValue(TopProperty, value);
-        }
-
-        static MetroVisualElement()
-        {
-            ElementBase.DefaultStyle<MetroVisualElement>(DefaultStyleKeyProperty);
         }
     }
 }

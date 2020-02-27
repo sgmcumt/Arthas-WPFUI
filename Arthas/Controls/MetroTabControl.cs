@@ -1,32 +1,32 @@
-﻿using System.Windows.Controls;
-using Arthas.Utility.Element;
+﻿using System.Windows;
+using System.Windows.Controls;
 
 namespace Arthas.Controls
 {
     public class MetroTabControl : TabControl
     {
+        static MetroTabControl()
+        {
+            DefaultStyleKeyProperty.OverrideMetadata(typeof(MetroTabControl), new FrameworkPropertyMetadata(typeof(MetroTabControl)));
+        }
+
         void SelectionState()
         {
-            ElementBase.GoToState(this, "SelectionStart");
-            ElementBase.GoToState(this, "SelectionEnd");
+            VisualStateManager.GoToState(this, "SelectionStart", false);
+            VisualStateManager.GoToState(this, "SelectionEnd", false);
         }
 
         public MetroTabControl()
         {
             Loaded += delegate
             {
-                ElementBase.GoToState(this, "SelectionLoaded");
+                VisualStateManager.GoToState(this, "SelectionLoaded", false);
             };
             SelectionChanged += delegate(object sender, SelectionChangedEventArgs e)
             {
                 if (e.Source is MetroTabControl)
                     SelectionState();
             };
-        }
-
-        static MetroTabControl()
-        {
-            ElementBase.DefaultStyle<MetroTabControl>(DefaultStyleKeyProperty);
         }
     }
 }

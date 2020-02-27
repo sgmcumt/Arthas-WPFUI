@@ -18,11 +18,6 @@ namespace Arthas.Demo
                 Close();
             };
 
-            TreeView.SizeChanged += delegate
-            {
-                WaterfallFlow.Refresh();
-            };
-
             var timer = new DispatcherTimer();
             timer.Tick += delegate
             {

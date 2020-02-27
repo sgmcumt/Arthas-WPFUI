@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Windows;
 using System.Windows.Controls.Primitives;
-using Arthas.Utility.Element;
 
 namespace Arthas.Controls
 {
@@ -12,27 +11,32 @@ namespace Arthas.Controls
         public double OffsetX { get; set; } = 0.0;
         public double OffsetY { get; set; } = 0.0;
 
-        public static readonly DependencyProperty XProperty = ElementBase.Property<MetroThumb, double>(nameof(XProperty), -1);
-        public static readonly DependencyProperty YProperty = ElementBase.Property<MetroThumb, double>(nameof(YProperty), -1);
+        public static readonly DependencyProperty XProperty =
+            DependencyProperty.Register(nameof(X), typeof(double), typeof(MetroThumb), new FrameworkPropertyMetadata(-1, OnXChanged));
 
         public double X
         {
-            get => (double)GetValue(XProperty) - OffsetX;
-            set
-            {
-                SetValue(XProperty, value + OffsetX);
-                Change();
-            }
+            get => (double)GetValue(XProperty);
+            set => SetValue(XProperty, value);
         }
+
+        static void OnXChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            ((MetroThumb)d).OnChange();
+        }
+
+        public static readonly DependencyProperty YProperty =
+            DependencyProperty.Register(nameof(Y), typeof(double), typeof(MetroThumb), new FrameworkPropertyMetadata(-1, OnYChanged));
 
         public double Y
         {
-            get => (double)GetValue(YProperty) - OffsetY;
-            set
-            {
-                SetValue(YProperty, value + OffsetY);
-                Change();
-            }
+            get => (double)GetValue(YProperty);
+            set => SetValue(YProperty, value);
+        }
+
+        static void OnYChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            ((MetroThumb)d).OnChange();
         }
 
         public event EventHandler ValueChange;
@@ -44,8 +48,8 @@ namespace Arthas.Controls
 
             Loaded += delegate
             {
-                X = (double)GetValue(XProperty) == -1 ? 0 : X;
-                Y = (double)GetValue(YProperty) == -1 ? 0 : Y;
+                X = Math.Max(X, 0);
+                Y = Math.Max(Y, 0);
             };
             DragStarted += delegate(object sender, DragStartedEventArgs e)
             {
@@ -90,10 +94,9 @@ namespace Arthas.Controls
             set => Y = ActualHeight * value;
         }
 
-        void Change()
+        void OnChange()
         {
-            if (ValueChange != null)
-                ValueChange(this, null);
+            ValueChange?.Invoke(this, null);
         }
     }
 }

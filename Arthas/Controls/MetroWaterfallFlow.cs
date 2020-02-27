@@ -1,146 +1,113 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
-using Arthas.Utility.Element;
+using System.Windows.Controls.Primitives;
 
 namespace Arthas.Controls
 {
-    public class MetroWaterfallFlow : Canvas
+    public class MetroWaterfallFlow : Panel
     {
-        int column;
-        double listWidth = 180;
+        public static readonly DependencyProperty SizeProperty =
+            DependencyProperty.Register(nameof(Size), typeof(double), typeof(MetroWaterfallFlow),
+                new FrameworkPropertyMetadata(double.NaN, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault | FrameworkPropertyMetadataOptions.AffectsMeasure | FrameworkPropertyMetadataOptions.AffectsArrange));
 
-        public double ListWidth
+        public double Size
         {
-            get => listWidth;
-            set
+            get => (double)GetValue(SizeProperty);
+            set => SetValue(SizeProperty, value);
+        }
+
+        static double GetValue(double num, double defVal = 0.0)
+        {
+            return double.IsNaN(num) || double.IsNegativeInfinity(num) || double.IsPositiveInfinity(num) ? defVal : num;
+        }
+
+        int GetColumn(double width)
+        {
+            var itemSize = GetValue(Size, 100.0);
+            var value = GetValue(width);
+            var column = value / itemSize;
+            return (int)Math.Max(column, 1);
+        }
+
+        protected override Size MeasureOverride(Size constraint)
+        {
+            return Layout(constraint, true);
+        }
+
+        protected override Size ArrangeOverride(Size arrangeSize)
+        {
+            Layout(arrangeSize, false);
+            return arrangeSize;
+        }
+
+        void ForEach(int column, Action<int, UIElement[]> action)
+        {
+            var index = 0;
+            var items = new List<UIElement>();
+
+            for (var i = 0; i < InternalChildren.Count; i++)
             {
-                listWidth = value;
-                SetColumn();
-            }
-        }
+                var child = InternalChildren[i];
 
-        static MetroWaterfallFlow()
-        {
-            ElementBase.DefaultStyle<MetroWaterfallFlow>(DefaultStyleKeyProperty);
-        }
+                if (child is Popup)
+                    continue;
 
-        public MetroWaterfallFlow()
-        {
-            Loaded += delegate
-            {
-                SetColumn();
-                Margin = new Thickness(Margin.Left);
-            };
-            SizeChanged += delegate
-            {
-                SetColumn();
-            };
-        }
+                if (child.Visibility == Visibility.Collapsed)
+                    continue;
 
-        void SetColumn()
-        {
-            // MinWidth = listWidth + Margin.Left * 4;
-            column = (int)(ActualWidth / listWidth);
-            if (column <= 0)
-                column = 1;
-            Refresh();
-        }
+                index++;
+                items.Add(child);
 
-        public void Add(FrameworkElement element)
-        {
-            element.Width = ListWidth;
-            if (element is Grid grid)
-                if (grid.Children.Count > 0)
-                    ((FrameworkElement)grid.Children[0]).Margin = new Thickness(Margin.Left);
-            Children.Add(element);
-            Refresh();
-        }
+                if (items.Count != column)
+                    continue;
 
-        public class Point
-        {
-            public int Index { get; set; }
-            public double Buttom { get; set; }
-            public double Height { get; set; }
+                action(index - items.Count, items.ToArray());
 
-            public Point(int index, double height, double buttom)
-            {
-                Index = index;
-                Height = height;
-                Buttom = buttom;
-            }
-        }
-
-        public void Refresh()
-        {
-            // 初始化参数
-            var maxHeight = 0.0;
-            var list = new Dictionary<int, Point>();
-            var newList = new Dictionary<int, Dictionary<int, Point>>();
-            for (var i = 0; i < Children.Count; i++)
-            {
-                (Children[i] as FrameworkElement)?.UpdateLayout();
-                list.Add(i, new Point(i, ((FrameworkElement)Children[i]).ActualHeight, 0.0));
+                items.Clear();
             }
 
+            if (items.Count == 0)
+                return;
+
+            action(index - items.Count, items.ToArray());
+            items.Clear();
+        }
+
+        Size Layout(Size size, bool isMeasure)
+        {
+            var result = default(Size);
+            var column = GetColumn(size.Width);
+            var itemSize = GetValue(size.Width / column);
+
+            var bottoms = new Dictionary<int, double>();
             for (var i = 0; i < column; i++)
-                newList.Add(i, new Dictionary<int, Point>());
+                bottoms[i] = 0.0;
 
-            // 智能排序到 nlist
-            for (var i = 0; i < list.Count; i++)
-                if (i < column)
-                {
-                    list[i].Buttom = list[i].Height;
-                    newList[i].Add(newList[i].Count, list[i]);
-                }
-                else
-                {
-                    var b = 0.0;
-                    var l = 0;
-                    for (var j = 0; j < column; j++)
-                    {
-                        var jh = newList[j][newList[j].Count - 1].Buttom + list[i].Height;
-                        if (b != 0.0 && !(jh < b))
-                            continue;
-                        b = jh;
-                        l = j;
-                    }
-
-                    list[i].Buttom = b;
-                    newList[l].Add(newList[l].Count, list[i]);
-                }
-
-            // 开始布局
-            for (var i = 0; i < newList.Count; i++)
+            ForEach(column, (index, items) =>
             {
-                for (var j = 0; j < newList[i].Count; j++)
+                for (var i = 0; i < items.Length; i++)
                 {
-                    Children[newList[i][j].Index].SetValue(LeftProperty, i * ActualWidth / column);
-                    Children[newList[i][j].Index].SetValue(TopProperty, newList[i][j].Buttom - newList[i][j].Height);
-                    Children[newList[i][j].Index].SetValue(WidthProperty, ActualWidth / column);
+                    var child = items[i];
 
-                    if (Children[newList[i][j].Index] is Grid)
-                        ((FrameworkElement)(Children[newList[i][j].Index] as Grid)?.Children[0]).Margin = Margin;
+                    if (isMeasure)
+                        child.Measure(new Size(itemSize, double.PositiveInfinity));
+
+                    var newIndex = i;
+
+                    if (!isMeasure)
+                        child.Arrange(new Rect(newIndex * itemSize, bottoms[newIndex], itemSize, child.DesiredSize.Height));
+
+                    bottoms[newIndex] += child.DesiredSize.Height;
                 }
+            });
 
-                // 不知道为什么如果不写这么一句会出错
-                if (newList.ContainsKey(i))
-                    if (newList[i].ContainsKey(newList[i].Count - 1))
-                    {
-                        var mh = newList[i][newList[i].Count - 1].Buttom;
-                        maxHeight = mh > maxHeight ? mh : maxHeight;
-                    }
-            }
+            result.Width = GetValue(size.Width);
+            foreach (var bottom in bottoms)
+                result.Height = Math.Max(result.Height, bottom.Value);
 
-            Height = maxHeight;
-            list.Clear();
-            newList.Clear();
-        }
-
-        public void Remove(UIElement element)
-        {
-            Children.Remove(element);
-            Refresh();
+            return result;
         }
     }
 }

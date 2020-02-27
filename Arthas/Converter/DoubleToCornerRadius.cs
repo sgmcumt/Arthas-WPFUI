@@ -9,6 +9,8 @@ namespace Arthas.Converter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
+            if (value is CornerRadius)
+                return value;
             return parameter != null ? new CornerRadius((double)value / System.Convert.ToDouble(parameter)) : new CornerRadius((double)value);
         }
 

@@ -1,0 +1,22 @@
+<#@ template hostspecific="true" language="C#" #>
+<#@ output extension=".xaml" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.IO" #>
+<#@ import namespace="System.Text" #>
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+    <ResourceDictionary.MergedDictionaries>
+<#
+    Host.SetOutputEncoding(Encoding.UTF8, true);
+
+    foreach (var file in Directory.EnumerateFiles(Host.ResolvePath("../Controls"), "*.xaml"))
+    {
+        var fileName = Path.GetFileName(file);
+        if (fileName == "MetroBase.xaml")
+            continue;
+#>
+        <ResourceDictionary Source="/Arthas;component/Controls/<#= fileName #>" />
+<#
+    }
+#>
+    </ResourceDictionary.MergedDictionaries>
+</ResourceDictionary>

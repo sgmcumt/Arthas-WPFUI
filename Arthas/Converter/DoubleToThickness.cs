@@ -13,41 +13,20 @@ namespace Arthas.Converter
                 return new Thickness(0);
             if (parameter == null)
                 return new Thickness(System.Convert.ToDouble(value));
-            switch (parameter.ToString())
+            return parameter.ToString() switch
             {
-                case "Left":
-                    return new Thickness(System.Convert.ToDouble(value), 0, 0, 0);
-
-                case "Top":
-                    return new Thickness(0, System.Convert.ToDouble(value), 0, 0);
-
-                case "Right":
-                    return new Thickness(0, 0, System.Convert.ToDouble(value), 0);
-
-                case "Buttom":
-                    return new Thickness(0, 0, 0, System.Convert.ToDouble(value));
-
-                case "LeftTop":
-                    return new Thickness(System.Convert.ToDouble(value), System.Convert.ToDouble(value), 0, 0);
-
-                case "LeftButtom":
-                    return new Thickness(System.Convert.ToDouble(value), 0, 0, System.Convert.ToDouble(value));
-
-                case "RightTop":
-                    return new Thickness(0, System.Convert.ToDouble(value), System.Convert.ToDouble(value), 0);
-
-                case "RigthButtom":
-                    return new Thickness(0, 0, System.Convert.ToDouble(value), System.Convert.ToDouble(value));
-
-                case "LeftRight":
-                    return new Thickness(System.Convert.ToDouble(value), 0, System.Convert.ToDouble(value), 0);
-
-                case "TopButtom":
-                    return new Thickness(0, System.Convert.ToDouble(value), 0, System.Convert.ToDouble(value));
-
-                default:
-                    return new Thickness(System.Convert.ToDouble(value));
-            }
+                "Left"        => new Thickness(System.Convert.ToDouble(value), 0, 0, 0),
+                "Top"         => new Thickness(0, System.Convert.ToDouble(value), 0, 0),
+                "Right"       => new Thickness(0, 0, System.Convert.ToDouble(value), 0),
+                "Bottom"      => new Thickness(0, 0, 0, System.Convert.ToDouble(value)),
+                "LeftTop"     => new Thickness(System.Convert.ToDouble(value), System.Convert.ToDouble(value), 0, 0),
+                "LeftBottom"  => new Thickness(System.Convert.ToDouble(value), 0, 0, System.Convert.ToDouble(value)),
+                "RightTop"    => new Thickness(0, System.Convert.ToDouble(value), System.Convert.ToDouble(value), 0),
+                "RightBottom" => new Thickness(0, 0, System.Convert.ToDouble(value), System.Convert.ToDouble(value)),
+                "LeftRight"   => new Thickness(System.Convert.ToDouble(value), 0, System.Convert.ToDouble(value), 0),
+                "TopBottom"   => new Thickness(0, System.Convert.ToDouble(value), 0, System.Convert.ToDouble(value)),
+                _             => new Thickness(System.Convert.ToDouble(value))
+            };
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
@@ -67,7 +46,7 @@ namespace Arthas.Converter
                 case "Right":
                     return ((Thickness)value).Right;
 
-                case "Buttom":
+                case "Bottom":
                     return ((Thickness)value).Bottom;
 
                 default:

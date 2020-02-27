@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Input;
 using System.Windows.Media;
-using Arthas.Utility.Element;
 
 namespace Arthas.Controls
 {
@@ -14,25 +12,27 @@ namespace Arthas.Controls
             DefaultStyleKeyProperty.OverrideMetadata(typeof(MetroExpander), new FrameworkPropertyMetadata(typeof(MetroExpander)));
         }
 
-        public static readonly DependencyProperty IsExpandedProperty = ElementBase.Property<MetroExpander, bool>(nameof(IsExpandedProperty));
-        public static readonly DependencyProperty CanHideProperty = ElementBase.Property<MetroExpander, bool>(nameof(CanHideProperty));
-        public static readonly DependencyProperty HeaderProperty = ElementBase.Property<MetroExpander, string>(nameof(HeaderProperty));
-        public static readonly DependencyProperty HintProperty = ElementBase.Property<MetroExpander, string>(nameof(HintProperty));
-        public static readonly DependencyProperty HintBackgroundProperty = ElementBase.Property<MetroExpander, Brush>(nameof(HintBackgroundProperty));
-        public static readonly DependencyProperty HintForegroundProperty = ElementBase.Property<MetroExpander, Brush>(nameof(HintForegroundProperty));
-        public static readonly DependencyProperty IconProperty = ElementBase.Property<MetroExpander, ImageSource>(nameof(IconProperty), null);
-
-        public static RoutedUICommand ButtonClickCommand = ElementBase.Command<MetroExpander>(nameof(ButtonClickCommand));
+        public static readonly DependencyProperty IsExpandedProperty =
+            DependencyProperty.Register(nameof(IsExpanded), typeof(bool), typeof(MetroExpander), new FrameworkPropertyMetadata(false, OnIsExpandedChanged));
 
         public bool IsExpanded
         {
             get => (bool)GetValue(IsExpandedProperty);
-            set
-            {
-                SetValue(IsExpandedProperty, value);
-                ElementBase.GoToState(this, IsExpanded ? "Expand" : "Normal");
-            }
+            set => SetValue(IsExpandedProperty, value);
         }
+
+        static void OnIsExpandedChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            ((MetroExpander)d).OnIsExpandedChanged();
+        }
+
+        void OnIsExpandedChanged()
+        {
+            VisualStateManager.GoToState(this, IsExpanded ? "Expand" : "Normal", false);
+        }
+
+        public static readonly DependencyProperty CanHideProperty =
+            DependencyProperty.Register(nameof(CanHide), typeof(bool), typeof(MetroExpander));
 
         public bool CanHide
         {
@@ -40,11 +40,17 @@ namespace Arthas.Controls
             set => SetValue(CanHideProperty, value);
         }
 
+        public static readonly DependencyProperty HeaderProperty =
+            DependencyProperty.Register(nameof(Header), typeof(string), typeof(MetroExpander));
+
         public string Header
         {
             get => (string)GetValue(HeaderProperty);
             set => SetValue(HeaderProperty, value);
         }
+
+        public static readonly DependencyProperty HintProperty =
+            DependencyProperty.Register(nameof(Hint), typeof(string), typeof(MetroExpander));
 
         public string Hint
         {
@@ -52,11 +58,17 @@ namespace Arthas.Controls
             set => SetValue(HintProperty, value);
         }
 
+        public static readonly DependencyProperty HintBackgroundProperty =
+            DependencyProperty.Register(nameof(HintBackground), typeof(Brush), typeof(MetroExpander));
+
         public Brush HintBackground
         {
             get => (Brush)GetValue(HintBackgroundProperty);
             set => SetValue(HintBackgroundProperty, value);
         }
+
+        public static readonly DependencyProperty HintForegroundProperty =
+            DependencyProperty.Register(nameof(HintForeground), typeof(Brush), typeof(MetroExpander));
 
         public Brush HintForeground
         {
@@ -64,10 +76,28 @@ namespace Arthas.Controls
             set => SetValue(HintForegroundProperty, value);
         }
 
+        public static readonly DependencyProperty IconProperty =
+            DependencyProperty.Register(nameof(Icon), typeof(ImageSource), typeof(MetroExpander));
+
         public ImageSource Icon
         {
             get => (ImageSource)GetValue(IconProperty);
             set => SetValue(IconProperty, value);
+        }
+
+        MetroFocusButton PART_Button;
+
+        public override void OnApplyTemplate()
+        {
+            base.OnApplyTemplate();
+            PART_Button = GetTemplateChild(nameof(PART_Button)) as MetroFocusButton;
+            if (PART_Button != null)
+                PART_Button.Click += delegate
+                {
+                    if (CanHide && Content != null)
+                        IsExpanded = !IsExpanded;
+                    Click?.Invoke(this, EventArgs.Empty);
+                };
         }
 
         public event EventHandler Click;
@@ -80,15 +110,8 @@ namespace Arthas.Controls
                     IsExpanded = false;
                 else if (!CanHide)
                     IsExpanded = true;
-                ElementBase.GoToState(this, IsExpanded ? "StartExpand" : "StartNormal");
+                VisualStateManager.GoToState(this, IsExpanded ? "StartExpand" : "StartNormal", false);
             };
-
-            CommandBindings.Add(new CommandBinding(ButtonClickCommand, delegate
-            {
-                if (CanHide && Content != null)
-                    IsExpanded = !IsExpanded;
-                Click?.Invoke(this, null);
-            }));
         }
 
         public void Clear()
@@ -100,23 +123,18 @@ namespace Arthas.Controls
         {
             get
             {
-                switch (Content)
+                return Content switch
                 {
-                    case StackPanel _:
-                        return (Content as StackPanel)?.Children;
-
-                    case Grid _:
-                        return (Content as Grid)?.Children;
-
-                    default:
-                        return null;
-                }
+                    StackPanel _ => (Content as StackPanel)?.Children,
+                    Grid _       => (Content as Grid)?.Children,
+                    _            => null
+                };
             }
         }
 
         public void Add(FrameworkElement element)
         {
-            if (!(Content is StackPanel stackPanel))
+            if (!(Content is StackPanel))
                 Content = new StackPanel();
             (Content as StackPanel)?.Children.Add(element);
         }

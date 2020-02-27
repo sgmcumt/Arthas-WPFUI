@@ -6,4 +6,7 @@
     <ItemGroup>
         <ProjectReference Include="..\Arthas\Arthas.csproj" />
     </ItemGroup>
+    <ItemGroup>
+        <PackageReference Include="FontAwesomeForWPF" Version="20.2.22.1" />
+    </ItemGroup>
 </Project>
