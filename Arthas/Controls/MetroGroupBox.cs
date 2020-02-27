@@ -1,4 +1,4 @@
-﻿using Arthas.Utility.Element;
+﻿using System.Windows;
 using System.Windows.Controls;
 
 namespace Arthas.Controls
@@ -7,7 +7,7 @@ namespace Arthas.Controls
     {
         static MetroGroupBox()
         {
-            ElementBase.DefaultStyle<MetroGroupBox>(DefaultStyleKeyProperty);
+            DefaultStyleKeyProperty.OverrideMetadata(typeof(MetroGroupBox), new FrameworkPropertyMetadata(typeof(MetroGroupBox)));
         }
     }
 }

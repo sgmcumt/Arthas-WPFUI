@@ -1,31 +1,42 @@
-﻿using Arthas.Utility.Element;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
 
 namespace Arthas.Controls
 {
     public class MetroCanvasGrid : ContentControl
     {
-        public static readonly DependencyProperty ViewportProperty = ElementBase.Property<MetroCanvasGrid, Rect>(nameof(ViewportProperty));
-        public Rect Viewport { get { return (Rect)GetValue(ViewportProperty); } set { SetValue(ViewportProperty, value); } }
-
-        public static readonly DependencyProperty GridOpacityProperty = ElementBase.Property<MetroCanvasGrid, double>(nameof(GridOpacityProperty));
-        public static readonly DependencyProperty GridSizeProperty = ElementBase.Property<MetroCanvasGrid, double>(nameof(GridSizeProperty));
-        public static readonly DependencyProperty CornerRadiusProperty = ElementBase.Property<MetroCanvasGrid, CornerRadius>(nameof(CornerRadiusProperty));
-
-        public double GridOpacity { get { return (double)GetValue(GridOpacityProperty); } set { SetValue(GridOpacityProperty, value); } }
-        public CornerRadius CornerRadius { get { return (CornerRadius)GetValue(CornerRadiusProperty); } set { SetValue(CornerRadiusProperty, value); } }
-
-        public bool IsApplyTheme { get; set; } = true;
-
-        public MetroCanvasGrid()
-        {
-            Utility.Refresh(this);
-        }
-
         static MetroCanvasGrid()
         {
-            ElementBase.DefaultStyle<MetroCanvasGrid>(DefaultStyleKeyProperty);
+            DefaultStyleKeyProperty.OverrideMetadata(typeof(MetroCanvasGrid), new FrameworkPropertyMetadata(typeof(MetroCanvasGrid)));
         }
+
+        public static readonly DependencyProperty ViewportProperty =
+            DependencyProperty.Register(nameof(Viewport), typeof(Rect), typeof(MetroCanvasGrid));
+
+        public Rect Viewport
+        {
+            get => (Rect)GetValue(ViewportProperty);
+            set => SetValue(ViewportProperty, value);
+        }
+
+        public static readonly DependencyProperty GridOpacityProperty =
+            DependencyProperty.Register(nameof(GridOpacity), typeof(double), typeof(MetroCanvasGrid));
+
+        public double GridOpacity
+        {
+            get => (double)GetValue(GridOpacityProperty);
+            set => SetValue(GridOpacityProperty, value);
+        }
+
+        public static readonly DependencyProperty CornerRadiusProperty =
+            DependencyProperty.Register(nameof(CornerRadius), typeof(CornerRadius), typeof(MetroCanvasGrid));
+
+        public CornerRadius CornerRadius
+        {
+            get => (CornerRadius)GetValue(CornerRadiusProperty);
+            set => SetValue(CornerRadiusProperty, value);
+        }
+
+        public bool IsApplyTheme { get; set; } = true;
     }
 }

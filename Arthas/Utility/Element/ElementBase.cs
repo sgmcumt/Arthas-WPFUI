@@ -3,76 +3,28 @@ using System.Windows.Input;
 
 namespace Arthas.Utility.Element
 {
-    public class ElementBase
+    public static class ElementBase
     {
-        /// <summary>
-        /// 注册属性
-        /// public static readonly DependencyProperty Property = Utility.Property<T,T>(string,T);
-        /// </summary>
-        /// <typeparam name="thisType">this</typeparam>
-        /// <typeparam name="propertyType">如：string，bool</typeparam>
-        /// <param name="name">属性名</param>
-        /// <param name="defaultValue">属性值</param>
-        /// <returns></returns>
-        public static DependencyProperty Property<thisType, propertyType>(string name, propertyType defaultValue)
+        public static DependencyProperty Property<T, TProperty>(string name, TProperty defaultValue)
         {
-            return DependencyProperty.Register(name.Replace("Property", ""), typeof(propertyType), typeof(thisType), new PropertyMetadata(defaultValue));
+            return DependencyProperty.Register(name.Replace("Property", ""), typeof(TProperty), typeof(T), new PropertyMetadata(defaultValue));
         }
 
-        /// <summary>
-        /// 注册属性
-        /// public static readonly DependencyProperty Property = Utility.Property<T,T>(string,T);
-        /// </summary>
-        /// <typeparam name="thisType"></typeparam>
-        /// <typeparam name="propertyType"></typeparam>
-        /// <param name="name"></param>
-        /// <returns></returns>
-        public static DependencyProperty Property<thisType, propertyType>(string name)
+        public static DependencyProperty Property<T, TProperty>(string name)
         {
-            return DependencyProperty.Register(name.Replace("Property", ""), typeof(propertyType), typeof(thisType));
+            return DependencyProperty.Register(name.Replace("Property", ""), typeof(TProperty), typeof(T));
         }
 
-        /// <summary>
-        /// 注册事件
-        /// public static readonly RoutedEvent NameRoutedEvent = Utility.RoutedEvent<T,T>(string,T);
-        /// public event EventHandler Name { add { AddHandler(EventHandler, value); } remove { RemoveHandler(EventHandler, value); } }
-        /// </summary>
-        /// <typeparam name="thisType"></typeparam>
-        /// <typeparam name="propertyType"></typeparam>
-        /// <param name="name"></param>
-        /// <returns></returns>
-        public static RoutedEvent RoutedEvent<thisType, propertyType>(string name)
+        public static void DefaultStyle<T>(DependencyProperty dp)
         {
-            return EventManager.RegisterRoutedEvent(name.Replace("Event", ""), RoutingStrategy.Bubble, typeof(propertyType), typeof(thisType));
+            dp.OverrideMetadata(typeof(T), new FrameworkPropertyMetadata(typeof(T)));
         }
 
-        /// <summary>
-        /// 默认样式
-        /// Utility.DefaultStyle<T>(DefaultStyleKeyProperty);
-        /// </summary>
-        /// <typeparam name="thisType">this</typeparam>
-        /// <param name="dp">DefaultStyleKeyProperty</param>
-        public static void DefaultStyle<thisType>(DependencyProperty dp)
+        public static RoutedUICommand Command<T>(string name)
         {
-            dp.OverrideMetadata(typeof(thisType), new FrameworkPropertyMetadata(typeof(thisType)));
+            return new RoutedUICommand(name, name, typeof(T));
         }
 
-        /// <summary>
-        /// 初始化一个 Command
-        /// </summary>
-        /// <typeparam name="thisType"></typeparam>
-        /// <param name="name"></param>
-        /// <returns></returns>
-        public static RoutedUICommand Command<thisType>(string name)
-        {
-            return new RoutedUICommand(name, name, typeof(thisType));
-        }
-
-        /// <summary>
-        /// 切换状态
-        /// </summary>
-        /// <param name="element"></param>
-        /// <param name="state"></param>
         public static string GoToState(FrameworkElement element, string state)
         {
             VisualStateManager.GoToState(element, state, false);

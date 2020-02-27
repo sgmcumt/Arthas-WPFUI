@@ -1,13 +1,12 @@
-﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:Shell="clr-namespace:System.Windows.Shell;assembly=PresentationFramework"
-                    xmlns:Metro="clr-namespace:Arthas.Controls"
-                    x:Class="Arthas.Themes.Metro.MetroWindow">
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:metro="clr-namespace:Arthas.Controls">
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="/Arthas;component/Controls/MetroBase.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
-    <Style x:Key="buttonStyle" TargetType="{x:Type Button}">
+    <Style x:Key="ButtonStyle" TargetType="{x:Type Button}">
         <Setter Property="FocusVisualStyle" Value="{x:Null}" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
 
@@ -45,8 +44,8 @@
         </Setter>
     </Style>
 
-    <Style TargetType="{x:Type Metro:MetroWindow}">
-        <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+    <Style TargetType="{x:Type metro:MetroWindow}">
+        <Setter Property="UseLayoutRounding" Value="True" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
 
         <Setter Property="Background" Value="#FFF3F3F3" />
@@ -55,34 +54,9 @@
         <Setter Property="TitleForeground" Value="#ffffff" />
         <Setter Property="BorderThickness" Value="1" />
 
-        <Setter Property="FontSize" Value="12" />
-        <Setter Property="TextOptions.TextFormattingMode" Value="Display" />
-        <Setter Property="TextOptions.TextRenderingMode" Value="ClearType" />
-        <Setter Property="UseLayoutRounding" Value="True" />
-
-        <!--
-
-        相对的解决字体显示模糊的问题
-        <Setter Property="TextOptions.TextFormattingMode" Value="Display" />
-        <Setter Property="TextOptions.TextHintingMode" Value="Auto" />
-        <Setter Property="UseLayoutRounding" Value="True" />
-
-        位置会向下偏移一像素
-        <Setter Property="TextOptions.TextRenderingMode" Value="ClearType" />
-
-        清晰的字体，但是不好看
-        <Setter Property="FontFamily" Value="Arial,SimSun" />
-
-        -->
-
-        <Setter Property="Shell:WindowChrome.WindowChrome">
-            <Setter.Value>
-                <Shell:WindowChrome CaptionHeight="27" CornerRadius="5" GlassFrameThickness="-1" ResizeBorderThickness="5" UseAeroCaptionButtons="False" NonClientFrameEdges="None" />
-            </Setter.Value>
-        </Setter>
         <Setter Property="Template">
             <Setter.Value>
-                <ControlTemplate TargetType="{x:Type Metro:MetroWindow}">
+                <ControlTemplate TargetType="{x:Type metro:MetroWindow}">
                     <Border x:Name="border" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
                         <VisualStateManager.VisualStateGroups>
                             <VisualStateGroup>
@@ -114,34 +88,34 @@
                                 <Grid Grid.Column="2">
                                     <ContentPresenter Content="{TemplateBinding Menu}" Margin="0,32,-120,0" />
                                 </Grid>
-                                <Grid Grid.Row="1" Grid.ColumnSpan="4" Background="{TemplateBinding Background}">
+                                <Grid Grid.Row="1" Grid.ColumnSpan="4" Grid.Column="0" Background="{TemplateBinding Background}">
                                     <AdornerDecorator>
                                         <ContentPresenter />
                                     </AdornerDecorator>
                                 </Grid>
-                                <Grid Grid.Column="0">
-                                    <Metro:MetroImage Source="{TemplateBinding Icon}" />
+                                <Grid Grid.Row="0" Grid.Column="0">
+                                    <Image Source="{TemplateBinding Icon}" />
                                     <Rectangle Fill="{TemplateBinding TitleForeground}" Opacity="0.15" />
                                 </Grid>
-                                <Grid Grid.Column="1">
-                                    <Metro:MetroTextBlock Text="{TemplateBinding Title}"  Foreground="{TemplateBinding TitleForeground}" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10,0" />
+                                <Grid Grid.Row="0" Grid.Column="1">
+                                    <metro:MetroTextBlock Text="{TemplateBinding Title}" Foreground="{TemplateBinding TitleForeground}" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10,0" />
                                 </Grid>
-                                <Grid Grid.Column="3" Shell:WindowChrome.IsHitTestVisibleInChrome="True">
-                                    <Button x:Name="minimizedButton" Foreground="{TemplateBinding TitleForeground}" HorizontalAlignment="Right" Click="Minimized" Margin="0,0,80,0" Style="{StaticResource buttonStyle}">
+                                <Grid Grid.Row="0" Grid.Column="3" WindowChrome.IsHitTestVisibleInChrome="True">
+                                    <Button x:Name="minimizedButton" Foreground="{TemplateBinding TitleForeground}" HorizontalAlignment="Right" Command="SystemCommands.MinimizeWindowCommand" Margin="0,0,80,0" Style="{StaticResource ButtonStyle}">
                                         <Button.Content>
                                             <Grid VerticalAlignment="Center" HorizontalAlignment="Center">
                                                 <Rectangle Width="14" Height="1" Fill="{TemplateBinding TitleForeground}" Margin="0,6,0,0" />
                                             </Grid>
                                         </Button.Content>
                                     </Button>
-                                    <Button x:Name="maximizedButton" Foreground="{TemplateBinding TitleForeground}" HorizontalAlignment="Right" Click="Maximized" Margin="0,0,40,0" Style="{StaticResource buttonStyle}">
+                                    <Button x:Name="maximizedButton" Foreground="{TemplateBinding TitleForeground}" HorizontalAlignment="Right" Command="SystemCommands.MaximizeWindowCommand" Margin="0,0,40,0" Style="{StaticResource ButtonStyle}">
                                         <Button.Content>
                                             <Grid VerticalAlignment="Center" HorizontalAlignment="Center">
                                                 <Rectangle Width="12" Height="12" Stroke="{TemplateBinding TitleForeground}" />
                                             </Grid>
                                         </Button.Content>
                                     </Button>
-                                    <Button x:Name="normalButton" Foreground="{TemplateBinding TitleForeground}" HorizontalAlignment="Right" Click="Normal" Margin="0,0,40,0" Style="{StaticResource buttonStyle}">
+                                    <Button x:Name="normalButton" Foreground="{TemplateBinding TitleForeground}" HorizontalAlignment="Right" Command="SystemCommands.RestoreWindowCommand" Margin="0,0,40,0" Style="{StaticResource ButtonStyle}">
                                         <Button.Content>
                                             <Grid VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,2,3,0">
                                                 <Rectangle Width="10" Height="10" Stroke="{TemplateBinding TitleForeground}" />
@@ -152,7 +126,7 @@
                                             </Grid>
                                         </Button.Content>
                                     </Button>
-                                    <Button x:Name="closeButton" Foreground="{TemplateBinding TitleForeground}" HorizontalAlignment="Right" Click="Close" Style="{StaticResource buttonStyle}">
+                                    <Button x:Name="closeButton" Foreground="{TemplateBinding TitleForeground}" HorizontalAlignment="Right" Command="SystemCommands.CloseWindowCommand" Style="{StaticResource ButtonStyle}">
                                         <Button.Content>
                                             <Grid VerticalAlignment="Center" HorizontalAlignment="Center">
                                                 <Rectangle Width="16" Height="1.2" Fill="{TemplateBinding TitleForeground}" RenderTransformOrigin="0.5,0.5">
@@ -173,7 +147,7 @@
                                         </Button.Content>
                                     </Button>
                                 </Grid>
-                                <Rectangle x:Name="disableRectangle" Grid.RowSpan="2" Grid.ColumnSpan="4" Fill="#FF000000" Opacity="0" IsHitTestVisible="False" />
+                                <Rectangle x:Name="disableRectangle" Grid.Row="0" Grid.RowSpan="2" Grid.ColumnSpan="4" Grid.Column="0" Fill="#FF000000" Opacity="0" IsHitTestVisible="False" />
                             </Grid>
                         </Grid>
                     </Border>
@@ -191,7 +165,7 @@
                         <Trigger Property="WindowState" Value="Maximized">
                             <Setter Property="Visibility" TargetName="maximizedButton" Value="Hidden" />
                             <Setter Property="Margin" TargetName="windowGrid" Value="8" />
-                            <Setter TargetName="windowGrid" Property="Margin" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(Shell:WindowChrome.WindowChrome).ResizeBorderThickness}" />
+                            <Setter TargetName="windowGrid" Property="Margin" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(WindowChrome.WindowChrome).ResizeBorderThickness}" />
                             <Setter Property="BorderThickness" TargetName="border" Value="0" />
                         </Trigger>
                         <Trigger Property="WindowState" Value="Normal">

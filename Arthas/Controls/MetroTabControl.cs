@@ -1,5 +1,5 @@
-﻿using Arthas.Utility.Element;
-using System.Windows.Controls;
+﻿using System.Windows.Controls;
+using Arthas.Utility.Element;
 
 namespace Arthas.Controls
 {
@@ -13,9 +13,15 @@ namespace Arthas.Controls
 
         public MetroTabControl()
         {
-            Loaded += delegate { ElementBase.GoToState(this, "SelectionLoaded"); };
-            SelectionChanged += delegate (object sender, SelectionChangedEventArgs e) { if (e.Source is MetroTabControl) { SelectionState(); } };
-            Utility.Refresh(this);
+            Loaded += delegate
+            {
+                ElementBase.GoToState(this, "SelectionLoaded");
+            };
+            SelectionChanged += delegate(object sender, SelectionChangedEventArgs e)
+            {
+                if (e.Source is MetroTabControl)
+                    SelectionState();
+            };
         }
 
         static MetroTabControl()

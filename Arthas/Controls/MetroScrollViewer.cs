@@ -1,6 +1,6 @@
-﻿using Arthas.Utility.Element;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
+using Arthas.Utility.Element;
 
 namespace Arthas.Controls
 {
@@ -11,14 +11,28 @@ namespace Arthas.Controls
         public static readonly DependencyProperty VerticalMarginProperty = ElementBase.Property<MetroScrollViewer, Thickness>(nameof(VerticalMarginProperty));
         public static readonly DependencyProperty HorizontalMarginProperty = ElementBase.Property<MetroScrollViewer, Thickness>(nameof(HorizontalMarginProperty));
 
-        public bool Float { get { return (bool)GetValue(FloatProperty); } set { SetValue(FloatProperty, value); } }
-        public bool AutoLimitMouse { get { return (bool)GetValue(AutoLimitMouseProperty); } set { SetValue(AutoLimitMouseProperty, value); } }
-        public Thickness VerticalMargin { get { return (Thickness)GetValue(VerticalMarginProperty); } set { SetValue(VerticalMarginProperty, value); } }
-        public Thickness HorizontalMargin { get { return (Thickness)GetValue(HorizontalMarginProperty); } set { SetValue(HorizontalMarginProperty, value); } }
-
-        public MetroScrollViewer()
+        public bool Float
         {
-            Utility.Refresh(this);
+            get => (bool)GetValue(FloatProperty);
+            set => SetValue(FloatProperty, value);
+        }
+
+        public bool AutoLimitMouse
+        {
+            get => (bool)GetValue(AutoLimitMouseProperty);
+            set => SetValue(AutoLimitMouseProperty, value);
+        }
+
+        public Thickness VerticalMargin
+        {
+            get => (Thickness)GetValue(VerticalMarginProperty);
+            set => SetValue(VerticalMarginProperty, value);
+        }
+
+        public Thickness HorizontalMargin
+        {
+            get => (Thickness)GetValue(HorizontalMarginProperty);
+            set => SetValue(HorizontalMarginProperty, value);
         }
 
         static MetroScrollViewer()

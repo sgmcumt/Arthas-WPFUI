@@ -1,7 +1,7 @@
-﻿using Arthas.Utility.Element;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
+using Arthas.Utility.Element;
 
 namespace Arthas.Controls
 {
@@ -13,15 +13,34 @@ namespace Arthas.Controls
         public static readonly DependencyProperty LeftProperty = ElementBase.Property<MetroVisualElement, double>(nameof(LeftProperty));
         public static readonly DependencyProperty TopProperty = ElementBase.Property<MetroVisualElement, double>(nameof(TopProperty));
 
-        public Visual Visual { get { return (Visual)GetValue(VisualProperty); } set { SetValue(VisualProperty, value); } }
-        public new double VisualOpacity { get { return (double)GetValue(VisualOpacityProperty); } set { SetValue(VisualOpacityProperty, value); } }
-        public double VisualBlurRadius { get { return (double)GetValue(VisualBlurRadiusProperty); } set { SetValue(VisualBlurRadiusProperty, value); } }
-        public double Left { get { return (double)GetValue(LeftProperty); } set { SetValue(LeftProperty, value); } }
-        public double Top { get { return (double)GetValue(TopProperty); } set { SetValue(TopProperty, value); } }
-
-        public MetroVisualElement()
+        public Visual Visual
         {
-            Utility.Refresh(this);
+            get => (Visual)GetValue(VisualProperty);
+            set => SetValue(VisualProperty, value);
+        }
+
+        public new double VisualOpacity
+        {
+            get => (double)GetValue(VisualOpacityProperty);
+            set => SetValue(VisualOpacityProperty, value);
+        }
+
+        public double VisualBlurRadius
+        {
+            get => (double)GetValue(VisualBlurRadiusProperty);
+            set => SetValue(VisualBlurRadiusProperty, value);
+        }
+
+        public double Left
+        {
+            get => (double)GetValue(LeftProperty);
+            set => SetValue(LeftProperty, value);
+        }
+
+        public double Top
+        {
+            get => (double)GetValue(TopProperty);
+            set => SetValue(TopProperty, value);
         }
 
         static MetroVisualElement()

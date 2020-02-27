@@ -1,9 +1,9 @@
-﻿using Arthas.Utility.Element;
-using System;
+﻿using System;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
+using Arthas.Utility.Element;
 
 namespace Arthas.Controls
 {
@@ -24,18 +24,77 @@ namespace Arthas.Controls
 
         public static RoutedUICommand ButtonClickCommand = ElementBase.Command<MetroTextBox>(nameof(ButtonClickCommand));
 
-        public string Title { get { return (string)GetValue(TitleProperty); } set { SetValue(TitleProperty, value); } }
-        public double TitleMinWidth { get { return (double)GetValue(TitleMinWidthProperty); } set { SetValue(TitleMinWidthProperty, value); } }
-        public Brush TitleForeground { get { return (Brush)GetValue(TitleForegroundProperty); } set { SetValue(TitleForegroundProperty, value); } }
-        public Brush MouseMoveBackground { get { return (Brush)GetValue(MouseMoveBackgroundProperty); } set { SetValue(MouseMoveBackgroundProperty, value); } }
-        public string InputHint { get { return (string)GetValue(InputHintProperty); } set { SetValue(InputHintProperty, value); } }
-        public string PopupHint { get { return (string)GetValue(PopupHintProperty); } set { SetValue(PopupHintProperty, value); } }
-        public string ButtonTitle { get { return (string)GetValue(ButtonTitleProperty); } set { SetValue(ButtonTitleProperty, value); } }
-        public ImageSource Icon { get { return (ImageSource)GetValue(IconProperty); } set { SetValue(IconProperty, value); } }
-        public string State { get { return (string)GetValue(StateProperty); } set { SetValue(StateProperty, value); } }
-        public bool MultipleLine { get { return (bool)GetValue(MultipleLineProperty); } set { SetValue(MultipleLineProperty, value); } }
-        public bool IsPassWordBox { get { return (bool)GetValue(IsPassWordBoxProperty); } set { SetValue(IsPassWordBoxProperty, value); } }
-        public CornerRadius CornerRadius { get { return (CornerRadius)GetValue(CornerRadiusProperty); } set { SetValue(CornerRadiusProperty, value); } }
+        public string Title
+        {
+            get => (string)GetValue(TitleProperty);
+            set => SetValue(TitleProperty, value);
+        }
+
+        public double TitleMinWidth
+        {
+            get => (double)GetValue(TitleMinWidthProperty);
+            set => SetValue(TitleMinWidthProperty, value);
+        }
+
+        public Brush TitleForeground
+        {
+            get => (Brush)GetValue(TitleForegroundProperty);
+            set => SetValue(TitleForegroundProperty, value);
+        }
+
+        public Brush MouseMoveBackground
+        {
+            get => (Brush)GetValue(MouseMoveBackgroundProperty);
+            set => SetValue(MouseMoveBackgroundProperty, value);
+        }
+
+        public string InputHint
+        {
+            get => (string)GetValue(InputHintProperty);
+            set => SetValue(InputHintProperty, value);
+        }
+
+        public string PopupHint
+        {
+            get => (string)GetValue(PopupHintProperty);
+            set => SetValue(PopupHintProperty, value);
+        }
+
+        public string ButtonTitle
+        {
+            get => (string)GetValue(ButtonTitleProperty);
+            set => SetValue(ButtonTitleProperty, value);
+        }
+
+        public ImageSource Icon
+        {
+            get => (ImageSource)GetValue(IconProperty);
+            set => SetValue(IconProperty, value);
+        }
+
+        public string State
+        {
+            get => (string)GetValue(StateProperty);
+            set => SetValue(StateProperty, value);
+        }
+
+        public bool MultipleLine
+        {
+            get => (bool)GetValue(MultipleLineProperty);
+            set => SetValue(MultipleLineProperty, value);
+        }
+
+        public bool IsPassWordBox
+        {
+            get => (bool)GetValue(IsPassWordBoxProperty);
+            set => SetValue(IsPassWordBoxProperty, value);
+        }
+
+        public CornerRadius CornerRadius
+        {
+            get => (CornerRadius)GetValue(CornerRadiusProperty);
+            set => SetValue(CornerRadiusProperty, value);
+        }
 
         public Func<string, bool> ErrorCheckAction { get; set; }
 
@@ -44,16 +103,25 @@ namespace Arthas.Controls
         public MetroTextBox()
         {
             ContextMenu = null;
-            Loaded += delegate { ErrorCheck(); };
-            TextChanged += delegate { ErrorCheck(); };
-            CommandBindings.Add(new CommandBinding(ButtonClickCommand, delegate { if (ButtonClick != null) { ButtonClick(this, null); } }));
-            Utility.Refresh(this);
+            Loaded += delegate
+            {
+                ErrorCheck();
+            };
+            TextChanged += delegate
+            {
+                ErrorCheck();
+            };
+            CommandBindings.Add(new CommandBinding(ButtonClickCommand, delegate
+            {
+                ButtonClick?.Invoke(this, null);
+            }));
         }
 
         void ErrorCheck()
         {
             // if (PopupHint == null || PopupHint == "") { PopupHint = InputHint; }
-            if (ErrorCheckAction != null) { State = ErrorCheckAction(Text) ? "true" : "false"; }
+            if (ErrorCheckAction != null)
+                State = ErrorCheckAction(Text) ? "true" : "false";
         }
 
         static MetroTextBox()

@@ -1,19 +1,18 @@
-﻿using Arthas.Utility.Element;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
+using Arthas.Utility.Element;
 
 namespace Arthas.Controls
 {
     public class MetroTitleMenuItem : MenuItem
     {
-        public static readonly new DependencyProperty IconProperty = ElementBase.Property<MetroTitleMenuItem, ImageSource>(nameof(IconProperty), null);
+        public new static readonly DependencyProperty IconProperty = ElementBase.Property<MetroTitleMenuItem, ImageSource>(nameof(IconProperty), null);
 
-        public new ImageSource Icon { get { return (ImageSource)GetValue(IconProperty); } set { SetValue(IconProperty, value); } }
-
-        public MetroTitleMenuItem()
+        public new ImageSource Icon
         {
-            Utility.Refresh(this);
+            get => (ImageSource)GetValue(IconProperty);
+            set => SetValue(IconProperty, value);
         }
 
         static MetroTitleMenuItem()

@@ -1,6 +1,6 @@
-﻿using Arthas.Utility.Element;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls.Primitives;
+using Arthas.Utility.Element;
 
 namespace Arthas.Controls
 {
@@ -10,13 +10,30 @@ namespace Arthas.Controls
         public static readonly DependencyProperty CornerRadiusProperty = ElementBase.Property<MetroSwitch, CornerRadius>(nameof(CornerRadiusProperty), new CornerRadius(10));
         public static readonly DependencyProperty BorderCornerRadiusProperty = ElementBase.Property<MetroSwitch, CornerRadius>(nameof(BorderCornerRadiusProperty), new CornerRadius(12));
 
-        public HorizontalAlignment TextHorizontalAlignment { get { return (HorizontalAlignment)GetValue(TextHorizontalAlignmentProperty); } set { SetValue(TextHorizontalAlignmentProperty, value); } }
-        public CornerRadius CornerRadius { get { return (CornerRadius)GetValue(CornerRadiusProperty); } set { SetValue(CornerRadiusProperty, value); } }
-        public CornerRadius BorderCornerRadius { get { return (CornerRadius)GetValue(BorderCornerRadiusProperty); } set { SetValue(BorderCornerRadiusProperty, value); } }
+        public HorizontalAlignment TextHorizontalAlignment
+        {
+            get => (HorizontalAlignment)GetValue(TextHorizontalAlignmentProperty);
+            set => SetValue(TextHorizontalAlignmentProperty, value);
+        }
+
+        public CornerRadius CornerRadius
+        {
+            get => (CornerRadius)GetValue(CornerRadiusProperty);
+            set => SetValue(CornerRadiusProperty, value);
+        }
+
+        public CornerRadius BorderCornerRadius
+        {
+            get => (CornerRadius)GetValue(BorderCornerRadiusProperty);
+            set => SetValue(BorderCornerRadiusProperty, value);
+        }
 
         public MetroSwitch()
         {
-            Loaded += delegate { ElementBase.GoToState(this, (bool)IsChecked ? "OpenLoaded" : "CloseLoaded"); };
+            Loaded += delegate
+            {
+                ElementBase.GoToState(this, (bool)IsChecked ? "OpenLoaded" : "CloseLoaded");
+            };
         }
 
         protected override void OnChecked(RoutedEventArgs e)

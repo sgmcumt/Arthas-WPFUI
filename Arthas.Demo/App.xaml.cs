@@ -1,8 +1,6 @@
-﻿using System.Windows;
-
-namespace Arthas.Demo
+﻿namespace Arthas.Demo
 {
-    public partial class App : Application
+    public partial class App
     {
     }
 }

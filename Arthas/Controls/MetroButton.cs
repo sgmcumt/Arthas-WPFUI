@@ -1,5 +1,4 @@
-﻿using Arthas.Utility.Element;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
 
 namespace Arthas.Controls
@@ -13,18 +12,18 @@ namespace Arthas.Controls
 
     public class MetroButton : Button
     {
-        public static readonly DependencyProperty MetroButtonStateProperty = ElementBase.Property<MetroButton, ButtonState>(nameof(MetroButtonStateProperty), ButtonState.None);
-
-        public ButtonState MetroButtonState { get { return (ButtonState)GetValue(MetroButtonStateProperty); } set { SetValue(MetroButtonStateProperty, value); } }
-
-        public MetroButton()
-        {
-            Utility.Refresh(this);
-        }
-
         static MetroButton()
         {
-            ElementBase.DefaultStyle<MetroButton>(DefaultStyleKeyProperty);
+            DefaultStyleKeyProperty.OverrideMetadata(typeof(MetroButton), new FrameworkPropertyMetadata(typeof(MetroButton)));
+        }
+
+        public static readonly DependencyProperty MetroButtonStateProperty =
+            DependencyProperty.Register(nameof(MetroButtonState), typeof(ButtonState), typeof(MetroButton));
+
+        public ButtonState MetroButtonState
+        {
+            get => (ButtonState)GetValue(MetroButtonStateProperty);
+            set => SetValue(MetroButtonStateProperty, value);
         }
     }
 }

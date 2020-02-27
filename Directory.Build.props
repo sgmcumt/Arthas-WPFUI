@@ -1,0 +1,12 @@
+<Project>
+    <PropertyGroup>
+        <TargetFrameworks>net461;netcoreapp3.0</TargetFrameworks>
+        <LangVersion>latest</LangVersion>
+    </PropertyGroup>
+    <ItemGroup>
+        <PackageReference Include="AutoVersionTask" Version="1.0.0" PrivateAssets="All" />
+    </ItemGroup>
+    <ItemGroup>
+        <Resource Include="Resources\**" />
+    </ItemGroup>
+</Project>
