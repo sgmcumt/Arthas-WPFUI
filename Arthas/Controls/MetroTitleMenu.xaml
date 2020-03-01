@@ -2,25 +2,14 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:metro="clr-namespace:Arthas.Controls">
     <ResourceDictionary.MergedDictionaries>
-        <ResourceDictionary Source="/Arthas;component/Controls/MetroBase.xaml" />
+        <ResourceDictionary Source="/Arthas;component/Controls/Common.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
     <Style TargetType="{x:Type metro:MetroTitleMenu}">
-        <Setter Property="FocusVisualStyle" Value="{x:Null}" />
-        <Setter Property="SnapsToDevicePixels" Value="True" />
-
-        <Setter Property="VerticalAlignment" Value="Top" />
-        <Setter Property="Margin" Value="0,-32,120,0" />
-        <Setter Property="Height" Value="32" />
-        <Setter Property="Background" Value="{StaticResource Brush}" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type metro:MetroTitleMenu}">
-                    <Grid Background="#ffffff">
-                        <Grid Background="{TemplateBinding Background}" ClipToBounds="True">
-                            <ItemsPresenter HorizontalAlignment="Right" />
-                        </Grid>
-                    </Grid>
+                    <ItemsPresenter />
                 </ControlTemplate>
             </Setter.Value>
         </Setter>

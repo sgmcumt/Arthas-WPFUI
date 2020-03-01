@@ -11,7 +11,7 @@
     foreach (var file in Directory.EnumerateFiles(Host.ResolvePath("../Controls"), "*.xaml"))
     {
         var fileName = Path.GetFileName(file);
-        if (fileName == "MetroBase.xaml")
+        if (fileName == "Common.xaml")
             continue;
 #>
         <ResourceDictionary Source="/Arthas;component/Controls/<#= fileName #>" />

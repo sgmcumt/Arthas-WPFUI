@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Interop;
 using System.Windows.Media;
+using Arthas.Interop;
 using ControlzEx.Behaviors;
 
 namespace Arthas.Controls
@@ -13,50 +16,31 @@ namespace Arthas.Controls
             DefaultStyleKeyProperty.OverrideMetadata(typeof(MetroWindow), new FrameworkPropertyMetadata(typeof(MetroWindow)));
         }
 
-        public static readonly DependencyProperty IsSubWindowShowProperty =
-            DependencyProperty.Register(nameof(IsSubWindowShow), typeof(bool), typeof(MetroWindow));
+        public static readonly DependencyProperty CaptionContentProperty =
+            DependencyProperty.Register(nameof(CaptionContent), typeof(object), typeof(MetroWindow));
 
-        public bool IsSubWindowShow
+        public object CaptionContent
         {
-            get => (bool)GetValue(IsSubWindowShowProperty);
-            set => SetValue(IsSubWindowShowProperty, value);
+            get => GetValue(CaptionContentProperty);
+            set => SetValue(CaptionContentProperty, value);
         }
 
-        public static readonly DependencyProperty MenuProperty =
-            DependencyProperty.Register(nameof(Menu), typeof(object), typeof(MetroWindow));
+        public static readonly DependencyProperty CaptionBackgroundProperty =
+            DependencyProperty.Register(nameof(CaptionBackground), typeof(Brush), typeof(MetroWindow));
 
-        public object Menu
+        public Brush CaptionBackground
         {
-            get => GetValue(MenuProperty);
-            set => SetValue(MenuProperty, value);
+            get => (Brush)GetValue(CaptionBackgroundProperty);
+            set => SetValue(CaptionBackgroundProperty, value);
         }
 
-        public new static readonly DependencyProperty BorderBrushProperty =
-            DependencyProperty.Register(nameof(BorderBrush), typeof(Brush), typeof(MetroWindow));
+        public static readonly DependencyProperty CaptionForegroundProperty =
+            DependencyProperty.Register(nameof(CaptionForeground), typeof(Brush), typeof(MetroWindow));
 
-        public new Brush BorderBrush
+        public Brush CaptionForeground
         {
-            get => (Brush)GetValue(BorderBrushProperty);
-            set => SetValue(BorderBrushProperty, value);
-        }
-
-        public static readonly DependencyProperty TitleForegroundProperty =
-            DependencyProperty.Register(nameof(TitleForeground), typeof(Brush), typeof(MetroWindow));
-
-        public Brush TitleForeground
-        {
-            get => (Brush)GetValue(TitleForegroundProperty);
-            set => SetValue(TitleForegroundProperty, value);
-        }
-
-        protected override void OnInitialized(EventArgs e)
-        {
-            base.OnInitialized(e);
-
-            WindowStartupLocation = WindowStartupLocation.CenterScreen;
-            AllowsTransparency = false;
-            if (WindowStyle == WindowStyle.None)
-                WindowStyle = WindowStyle.SingleBorderWindow;
+            get => (Brush)GetValue(CaptionForegroundProperty);
+            set => SetValue(CaptionForegroundProperty, value);
         }
 
         public MetroWindow()
@@ -91,6 +75,51 @@ namespace Arthas.Controls
                 GlowBrush = new SolidColorBrush(Color.FromArgb((byte)(32 * 2.55), 0, 0, 0)),
                 NonActiveGlowBrush = new SolidColorBrush(Color.FromArgb((byte)(12 * 2.55), 0, 0, 0))
             }.Attach(this);
+        }
+
+        Border PART_Caption;
+
+        public override void OnApplyTemplate()
+        {
+            base.OnApplyTemplate();
+
+            PART_Caption = GetTemplateChild(nameof(PART_Caption)) as Border;
+            SetCaption(PART_Caption);
+        }
+
+        public void SetCaption(FrameworkElement element)
+        {
+            if (element == null)
+                return;
+
+            element.MouseLeftButtonDown += delegate(object sender, MouseButtonEventArgs e)
+            {
+                var handle = new WindowInteropHelper(this).Handle;
+                if (handle == IntPtr.Zero)
+                    return;
+
+                if (e.ClickCount == 2)
+                    switch (ResizeMode)
+                    {
+                        case ResizeMode.CanResize:
+                        case ResizeMode.CanResizeWithGrip:
+
+                            switch (WindowState)
+                            {
+                                case WindowState.Normal:
+                                    SystemCommands.MaximizeWindow(this);
+                                    break;
+
+                                case WindowState.Maximized:
+                                    SystemCommands.RestoreWindow(this);
+                                    break;
+                            }
+
+                            break;
+                    }
+                else
+                    NativeMethods.SendMessage(handle, WindowsMessages.NCLBUTTONDOWN, (IntPtr)HitTest.CAPTION, IntPtr.Zero);
+            };
         }
     }
 }

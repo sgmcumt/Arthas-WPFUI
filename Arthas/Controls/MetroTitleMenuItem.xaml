@@ -3,7 +3,7 @@
                     xmlns:shell="clr-namespace:System.Windows.Shell;assembly=PresentationFramework"
                     xmlns:metro="clr-namespace:Arthas.Controls">
     <ResourceDictionary.MergedDictionaries>
-        <ResourceDictionary Source="/Arthas;component/Controls/MetroBase.xaml" />
+        <ResourceDictionary Source="/Arthas;component/Controls/Common.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
     <Style TargetType="{x:Type metro:MetroTitleMenuItem}">

@@ -3,7 +3,7 @@
                     xmlns:metro="clr-namespace:Arthas.Controls"
                     xmlns:converter="clr-namespace:Arthas.Converter">
     <ResourceDictionary.MergedDictionaries>
-        <ResourceDictionary Source="/Arthas;component/Controls/MetroBase.xaml" />
+        <ResourceDictionary Source="/Arthas;component/Controls/Common.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
     <converter:CornerRadiusToDouble x:Key="CornerRadiusToDouble" />
