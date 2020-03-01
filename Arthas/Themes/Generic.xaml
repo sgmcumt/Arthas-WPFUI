@@ -8,9 +8,6 @@
         <ResourceDictionary Source="/Arthas;component/Controls/MetroGroupBox.xaml" />
         <ResourceDictionary Source="/Arthas;component/Controls/MetroMenuItem.xaml" />
         <ResourceDictionary Source="/Arthas;component/Controls/MetroMenuSeparator.xaml" />
-        <ResourceDictionary Source="/Arthas;component/Controls/MetroMenuTabControl.xaml" />
-        <ResourceDictionary Source="/Arthas;component/Controls/MetroMenuTabItem.xaml" />
-        <ResourceDictionary Source="/Arthas;component/Controls/MetroPath.xaml" />
         <ResourceDictionary Source="/Arthas;component/Controls/MetroProgressBar.xaml" />
         <ResourceDictionary Source="/Arthas;component/Controls/MetroScrollViewer.xaml" />
         <ResourceDictionary Source="/Arthas;component/Controls/MetroSwitch.xaml" />
