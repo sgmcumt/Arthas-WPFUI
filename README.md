@@ -11,7 +11,7 @@
 - .Net 4.6.1
 - .Net Core 3.0
 
-## 食用方法
+## 使用方法
 
  - Visual Studio 2019 或 VSCode
  - .Net Core 3.0 SDK
